@@ -208,61 +208,10 @@ class dailyExpController extends Controller
 
 
 
-
-  
-    
-    
-    
-    
-    public function store_ajax(Request $request) {
-        
-          
-         return $request->all();
-          
-        $this->validate($request, [
-            'category_id' => 'required',
-            'item_id' => 'required',
-            'item_quantity' => 'required',
-            'item_unit_price' => 'required',
-        ]);
-        
-        $today = date('Y-m-d');  
-        
-        $category_id = $request->category_id;
-        $item_id= $request->item_id;
-        $item_quantity = $request->item_quantity;
-        $item_unit_price= $request->item_unit_price;
-        
-        
-        for($count = 0; $count < count($category_id); $count++){
-            $data= array(
-                 'Date' => $today,
-                 'expences_categoris_id' => $category_id[$count],
-                 'expences_items_id' => $item_id[$count],
-                 'expences_items_quantity' => $item_quantity[$count],
-                 'daily_expences_item_price' => $item_unit_price[$count],
-                 'daily_expences_total' => $item_unit_price[$count]*$item_quantity[$count],
-  
-            );
-             DB::table('daily_expences')->insert($data);
-        }
-        
-        
-        
-        
-          
-           return redirect::to('/dashboard/daily/exp/manage')
-                ->with('Save','Daily Expenses Save Successfully');
-        
-        
-        
-      /// end of store  
-    }
-    
     
     public function manage(){
         
-        
+        /*
            $get_all_daily_exp_info = DB::table('daily_expences')
             ->join('expences_items', 'daily_expences.expences_items_id', '=', 'expences_items.expences_items_id')
             ->select('daily_expences.*', 'expences_items.expences_items_name')
@@ -273,21 +222,50 @@ class dailyExpController extends Controller
 //       print_r($get_all_daily_exp_info);
 //       exit();
        
-            if($get_all_daily_exp_info == null){
-         return 'null';
-       }
-       else{
+
+*/
+$get_all_daily_exp_info = DB::table('daily_expences_total')
+                    ->orderBy('daily_expences_total.daily_expences_total_id', 'DESC')
+                    ->get();
+
+    //    echo'<pre>';
+    //   print_r($get_all_daily_exp_info);
+    //   exit();
+    $sum_total = DB::table('daily_expences')
+                 ->sum('daily_expences_total');
+ 
               $daily_info= view('supper_admin.exp.daily.manageDailyExp')
-               ->with('get_all_daily_exp_info',$get_all_daily_exp_info);
+                         ->with('sum_total',$sum_total)
+                          ->with('get_all_daily_exp_info',$get_all_daily_exp_info);
            
             return view('supper_admin.master')->with('x',$daily_info);
-       }
-       
+    
        
        
     }
     
     
+
+
+
+
+    public function exp_view_by_date($date){
+
+        $get_all_daily_exp_info = DB::table('daily_expences')
+                                ->where('date',  $date )
+                                ->get();
+
+          $sum_total = DB::table('daily_expences')
+                        ->where('date', $date)
+                        ->sum('daily_expences_total');
+
+          $daily_info= view('supper_admin.exp.daily.manageDailyExpByDate')
+                         ->with('sum_total',$sum_total)
+                        ->with('get_all_daily_exp_info',$get_all_daily_exp_info);
+           
+            return view('supper_admin.master')->with('x',$daily_info);
+
+    }
     
     
     

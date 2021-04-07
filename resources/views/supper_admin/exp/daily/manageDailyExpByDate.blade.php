@@ -9,7 +9,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>All  <small>Expences list</small></h3>
+                <h3>Expences list <small>by date</small></h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -56,23 +56,29 @@
                             session::put('Save', '');
                             ?>
                         </h4>
-               
                     </div> 
+                    
                     <div class="x_content">
+
+
                     <div class="">
                         <h2 class="tex text-center text-success">
                           Total Expences Amount {{ $sum_total}}.00 Taka
                         </h2>
-                     
+               
                     </div>
 
+
                     <div class="table-responsive">
-                        <table id="datatable-keytable" class="table table-striped jambo_table bulk_action">
+                        <table class="table table-hover table-bordered"">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Date</th>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
                                     <th>Amount (BDT)</th>
+                                    <th>Total(BDT)</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -82,21 +88,29 @@
                                 <tr>
                                     <th scope="row">  <?php echo $i;?></th>
                                      <td>{{$daily_info->date}}</td>
-                                     <td>{{$daily_info->grand_total}}.00 Taka </td>
+                                     <td>{{$daily_info->expences_items_id}}</td>
+                                     <td>{{$daily_info->expences_items_quantity}}</td>
+                                     <td>{{$daily_info->daily_expences_item_price}}.00</td>
+                                     <td>{{$daily_info->daily_expences_total}}.00</td>
 
 
                                     <td>
-                                        <a href="{{URL::to('/dashboard/daily/exp/view/by/'.$daily_info->date)}}" class="btn btn-success">
+                                        <a href="{{URL::to('/dashboard/daily/exp/single/view/'.$daily_info->daily_expences_id )}}" class="btn btn-success">
                                             <span class="glyphicon glyphicon-eye-open"></span>
                                         </a> 
 
-                                        <a href="{{URL::to('/dashboard/daily/exp/delete/'.$daily_info ->daily_expences_total_id)}}" class="btn btn-danger"  onclick="return one_delete();">
+                                        <a href="{{URL::to('/dashboard/daily/exp/single/edit/by/'.$daily_info->daily_expences_id )}}" class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-check"></span>
+                                        </a> 
+
+                                        <a href="{{URL::to('/dashboard/daily/exp/single/delete/'.$daily_info ->daily_expences_id )}}" class="btn btn-danger"  onclick="return one_delete();">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                     </td>  
                                 </tr> 
                                  <?php $i++;?>
                                 @endforeach()
+                       
                             </tbody>
                             
                         </table>

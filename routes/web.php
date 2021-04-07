@@ -83,6 +83,9 @@ Route::post('/get/item/name', 'daily\dailyExpController@getItemName');
 
 Route::post('/dashboard/daily/exp/store', 'daily\dailyExpController@store');
 Route::get('/dashboard/daily/exp/manage', 'daily\dailyExpController@manage');
+
+Route::get('/dashboard/daily/exp/view/by/{date}', 'daily\dailyExpController@exp_view_by_date');
+
 //////////////////////----------------- End Exp Item ---------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ 
 
 
