@@ -31,22 +31,33 @@ class cashInTypeController extends Controller
     
     
     public function store(Request $request) {
-        
+ 
         $this->validate($request, [
             'cash_in_type_name' => 'required',
             'cash_in_description' => 'required',
             'cash_in_type_status' => 'required',
         ]);
 
+        $status = $request->cash_in_type_status;
+
+        if($status == 'null' || $status == 'Null' || $status == 'NULL' ){
+          return back()->with('fail','Please Select Status');
+        }else{
+          $data=array();
+          $data['cash_in_type_name']= $request->cash_in_type_name;
+          $data['cash_in_description']= $request->cash_in_description;
+          $data['cash_in_type_status']= $request->cash_in_type_status;
+    
+          DB::table('cash_in_types')->insert($data);
+          return redirect::to('/dashboard/cash/in/type/manage')
+                  ->with('Save','Cash In Type Save Successfully'); ;
+        }
+
       
-        $data=array();
-        $data['cash_in_type_name']= $request->cash_in_type_name;
-        $data['cash_in_description']= $request->cash_in_description;
-        $data['cash_in_type_status']= $request->cash_in_type_status;
-  
-        DB::table('cash_in_types')->insert($data);
-        return redirect::to('/dashboard/cash/in/type/manage')
-                ->with('Save','Cash In Type Save Successfully'); ;
+       
+      
+      
+
     }
     
     
@@ -55,11 +66,10 @@ class cashInTypeController extends Controller
     public function manage() {
                $this->admin_dashboard_check();   
                
-           $get_all_cash_in_info =DB::table('cash_in_types')->paginate(15);
-                   //->get();
-                  //    ->select('*');
-                 //      ->all();
-                //  ->paginate(15);
+           $get_all_cash_in_info =DB::table('cash_in_types')
+                              ->orderBy('cash_in_type_id', 'DESC')
+                            ->get();
+ 
        
 //       echo'<pre>';
 //       print_r($get_all_cash_in_info);

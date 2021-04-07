@@ -80,6 +80,7 @@ Route::get('/dashboard/exp/item/manage', 'exp\expItemController@manage');
 Route::get('/dashboard/daily/exp/add', 'daily\dailyExpController@index');
 Route::post('/get/item/name', 'daily\dailyExpController@getItemName');
 
+Route::post('/dashboard/daily/exp/ref/store', 'daily\dailyExpController@ref_check');
 
 Route::post('/dashboard/daily/exp/store', 'daily\dailyExpController@store');
 Route::get('/dashboard/daily/exp/manage', 'daily\dailyExpController@manage');

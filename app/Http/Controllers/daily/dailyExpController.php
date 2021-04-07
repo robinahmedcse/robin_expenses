@@ -70,8 +70,17 @@ class dailyExpController extends Controller
         return $request->all();
    
  }
+
+ public function ref_check(Request $request) {
+ // return $request->all();
+
+  $reference=  $request->ref;
+  if($reference == "null" || $reference == "Null" || $reference =="NULL" || $reference <= 0)
+        return "Please Input valid information";
+  }
+  
    
-   
+ 
       
       
       
@@ -167,7 +176,7 @@ class dailyExpController extends Controller
                
                  $i=1;
                  foreach ($all_expen as $key => $exp) {
-                   echo '<tr><td class="text-center">'.$i .'</td><td class="text-center">'.$exp->expences_categoris_name .'</td><td class="text-center">'.$exp->expences_items_name .'</td><td class="text-center">'.$exp->expences_items_quantity .'</td><td class="text-center">'.$exp->daily_expences_item_price .'</td><td class="text-center">'.$exp->daily_expences_total .'</td> <td class="text-center"> Action</td></tr>';
+                   echo '<tr><td class="text-center">'.$i .'</td> <td class="text-center">'.$exp->expences_items_name .'</td><td class="text-center">'.$exp->expences_items_quantity .'</td><td class="text-center">'.$exp->daily_expences_item_price .'</td><td class="text-center">'.$exp->daily_expences_total .'</td> <td class="text-center"> Action</td></tr>';
                    $i++; 
                     
                 }

@@ -36,7 +36,19 @@
                   </div>
                   <div class="x_content">
                       
-                      
+                  <div>
+                              @if(Session::get('success'))
+                                    <div class="alert alert-success">
+                                        {{ session::get('success') }} 
+                                    </div>
+                                @endif 
+                                
+                                @if(Session::get('fail'))
+                                    <div class="alert alert-danger">
+                                        {{ session::get('fail') }} 
+                                    </div>
+                                @endif
+                   </div> 
                     <br />
                     
                      {!! Form::open(['url'=>'/dashboard/cash/in/type/save','method'=>'POST','class'=>'form-horizontal form-label-left']) !!}    

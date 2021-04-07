@@ -71,6 +71,14 @@
                         <br><br>
                     </div> 
                     <div class="x_content">
+                    <div align='right'>
+                            <a href="{{URL::to('dashboard/exp/item/add')}}">
+                                 <button type="button" class="btn btn-success btn-info">
+                                    Add Item 
+                                 </button>
+                             </a> 
+                     </div>
+
                     <table id="datatable-keytable" class="table table-striped table-bordered"">
                             <thead>
                                 <tr>

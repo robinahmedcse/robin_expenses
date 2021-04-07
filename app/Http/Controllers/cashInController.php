@@ -48,6 +48,8 @@ class cashInController extends Controller
         
         ]);
 
+     // return  $request->all();
+
       
         $data=array();
         $data['cash_in_type_id']= $request->cash_in_type_id;

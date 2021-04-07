@@ -59,6 +59,15 @@
                         <br><br>
                     </div> 
                     <div class="x_content">
+
+                    <div align='right'>
+                            <a href="{{URL::to('dashboard/exp/category/add')}}">
+                                 <button type="button" class="btn btn-success btn-info">
+                                     Add Cash in  
+                                   </button>
+                             </a> 
+                     </div>
+
                       <table id="datatable-keytable" class="table table-striped table-bordered"">
                             <thead>
                                 <tr>

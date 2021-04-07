@@ -47,7 +47,8 @@
                         </label>
                        <div class="col-md-9  col-sm-9 col-xs-12 form-group">
                               <input type="text" id="ref" name="ref" value="{{ old('ref')}}" required
-                                     class="form-control{{ $errors->has('ref') ? ' is-invalid' : '' }}" >   
+                                     onblur="ajax_ref_check(this.value);"  class="form-control{{ $errors->has('ref') ? ' is-invalid' : '' }}" >   
+                                     <span class="text-danger" id="success_ref"></span>
                                 @if ($errors->has('ref'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong style="color:red">{{ $errors->first('ref') }}</strong>
@@ -167,10 +168,9 @@
                   <div class="x_content">
  
                   <table class="table table-responsive table-bordered" id="item_table">
-                  <thead>
+                 
                                 <tr>
                                     <th width="6%" class="text-center">#</th>
-                                    <th width="21%"class="text-center" >Categoty Name</th>
                                     <th width="17%" class="text-center" >Item Name</th>
                                     <th width="15%" class="text-center" >Item Quantity</th>
                                     <th width="15%" class="text-center" >Unit Price</th>
@@ -179,13 +179,12 @@
                                          Action
                                     </th>
                                 </tr>
-                                </thead>   
+                      
 
-                                <tbody>
-                        
-                        </tbody>
 
                         </table>
+
+ 
 
 
                      <!-- /x_content -->
@@ -207,9 +206,33 @@
 
 
      
-             
-             
-             
+<script type="text/javascript">        
+   function ajax_ref_check(given_ref){
+      // alert(given_ref);
+       token=$('#token_dis').val();
+       $.ajax({
+                 type:'post',
+                 url:'{{URL::to("/dashboard/daily/exp/ref/store")}}',
+                 data:{
+                         ref:given_ref ,
+                         _token:token
+                       },
+                  datatype:'html',
+                  success:function(response) 
+                          {
+                             //console.log(response);
+                            $('#success_ref').html(response);
+                                           
+                               }
+
+                          });
+                        
+   }
+
+</script>       
+
+
+
 <script type="text/javascript">
        $(document).ready(function(){  
          $('select[name="category_id"]').on ('change',function(){
@@ -247,47 +270,19 @@
 
 <!-- add part -->
 <script type="text/javascript">
-$('.addExp').click(function(){
- 
 
+  $('.addExp').click(function(){
 
- alert ('denger1');
-
- 
-
-    ref =   $("#ref").val(); 
-    alert (ref);
-
-
+      ref =   $("#ref").val(); 
       dates = $('#date').val();
-      alert (dates);  
-      console.log (dates);
- 
-  
-    category_id = $("#cid option:selected").val();
-  // alert (category_id);
-  //   console.log(category_id);
- 
+      category_id = $("#cid option:selected").val();
+      item_id = $("#item option:selected").val();
+      qty =   $("#q").val(); 
+      price =   $("#amount").val(); 
 
-    
-  item_id = $("#item option:selected").val();
-  //  alert (item_id);
-  //  console.log(item_id);
+      token=$('#token_dis').val();
 
- 
-
-
-   qty =   $("#q").val(); 
-  //  alert (qty);
-
-
-  price =   $("#amount").val(); 
-  //  alert (price);
-
-
-  token=$('#token_dis').val();
-
-  $.ajax({
+         $.ajax({
              type:'post',
               url:'{{URL::to("/dashboard/daily/exp/store")}}',
               data:{
@@ -302,52 +297,13 @@ $('.addExp').click(function(){
                       },
 
                success:function(response) {
-                      console.log(response);
-                     $('#item_table').append(response);
-                      // var number_count = 1; 
-                      // $('$item_table').append("<tr>"+
-                      // "<td class = 'text-center'>"+   +"<td>"+
-                      // "<td class = 'text-center'>"+ response.expences_categoris_name +"<td>"+
-                      // "<td class = 'text-center'>"+ response.expences_items_name +"<td>"+
-                      // "<td class = 'text-center'>"+ response.expences_items_quantity +"<td>"+
-                      // "<td class = 'text-center'>"+ response.daily_expences_item_price +"<td>"+
-                      // "<td class = 'text-center'>"+ response.daily_expences_total +"<td>"+
-
-                      // "</td>");
-
-
-
-
-        //               var number_count = 1;
-        //               var html="";  
-        // html += '<tr>';
-        // html += '<td>';
-        // html += number_count++;
-        // html += '</td>';
-        // html += '<td> "+ response.expences_categoris_name +" </td>';
-
-        // html += '<td>  </td>';
-  
-        // html += '<td>';
-
-        // html += '<td></td>';
-      
-        // html += '<td> </td>';
-       
-        // html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td>';
-        // html +='</tr>';
-  
-    
-        // $('#item_table').append(html);
-        //    console.log(html);
-
-
+                    //  console.log(response);
+                     $('#item_table').html(response);
+          
                        }
 
            });
   
-
-   
 
 });
 

@@ -70,6 +70,7 @@ class expItemController extends Controller
            $get_all_item_info = DB::table('expences_items')
             ->join('expences_categoris', 'expences_items.expences_categoris_id', '=', 'expences_categoris.expences_categoris_id')
             ->select('expences_items.*', 'expences_categoris.expences_categoris_name')
+            ->orderBy('expences_items.expences_items_id', 'DESC')
             ->get();
            
 //       echo'<pre>';

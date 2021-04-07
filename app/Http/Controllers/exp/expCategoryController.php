@@ -41,7 +41,12 @@ class expCategoryController extends Controller
             'category_status' => 'required',
         ]);
 
-      
+        $status = $request->category_status;
+
+        if($status == 'null' || $status == 'Null' || $status == 'NULL' ){
+          return back()->with('fail','Please Select Status');
+        }else{
+
         $data=array();
         $data['expences_categoris_name']= $request->exp_category;
         $data['expences_categoris_description']= $request->exp_description;
@@ -50,10 +55,10 @@ class expCategoryController extends Controller
         DB::table('expences_categoris')->insert($data);
         return redirect::to('/dashboard/exp/category/manage')
                 ->with('Save','Expenses Category Save Successfully'); 
-    }
+           }
     
     
-    
+  }
     
     
     
@@ -61,7 +66,7 @@ class expCategoryController extends Controller
                $this->admin_dashboard_check();   
                
            $get_all_cate_info =DB::table('expences_categoris')
-                   //->paginate(15);
+                   ->orderBy('expences_categoris_id', 'DESC')
                   ->get();
                   //    ->select('*');
                  //      ->all();
