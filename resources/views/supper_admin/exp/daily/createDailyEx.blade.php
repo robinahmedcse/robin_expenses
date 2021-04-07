@@ -39,7 +39,8 @@
                       
                   <br />
              
-
+                  <!-- {!! Form::open(['url'=>'/dashboard/daily/exp/store','method'=>'POST','class'=>'form-horizontal form-label-left']) !!}    
+                   -->
                     <div class="form-group col-md-6  col-sm-6 col-xs-12 " >
                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
                           Ref. NO <span class="required">*</span>
@@ -63,7 +64,7 @@
                           Date <span class="required">*</span>
                         </label>
                        <div class="col-md-9  col-sm-9 col-xs-12 form-group">
-                       <input type="text" class="form-control" name="current_date" id="from_date" data-inputmask="'mask': '99/99/9999'">   
+                       <input type="text" class="form-control" name="date" id="date" data-inputmask="'mask': '99/99/9999'">   
                        </div>
                     </div>
 
@@ -106,7 +107,7 @@
                          Quantity / Times <span class="required">*</span>
                         </label>
                        <div class="col-md-9  col-sm-9 col-xs-12 form-group">
-                              <input type="number" id="q" name="ref" value="{{ old('q')}}" required
+                              <input type="number" id="q" name="quantity" value="{{ old('q')}}" required
                                      class="form-control{{ $errors->has('q') ? ' is-invalid' : '' }}" >   
                                 @if ($errors->has('q'))
                                 <span class="invalid-feedback" role="alert">
@@ -122,7 +123,7 @@
                          Amount<span class="required">*</span>
                         </label>
                        <div class="col-md-9  col-sm-9 col-xs-12 form-group">
-                              <input type="number" id="amount" name="ref" value="{{ old('amount')}}" required
+                              <input type="number" id="amount" name="amount" value="{{ old('amount')}}" required
                                      class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }}" >   
                                 @if ($errors->has('amount'))
                                 <span class="invalid-feedback" role="alert">
@@ -145,13 +146,13 @@
                       </div>
   
    
-             
+                      <!-- {!! Form::close() !!} -->
       
                   </div>
                 </div>
 
 
-
+             
 
 
 
@@ -258,9 +259,9 @@ $('.addExp').click(function(){
     alert (ref);
 
 
-      from_dates = $('#from_date').val();
-      alert (from_dates);  
-      console.log (from_dates);
+      dates = $('#date').val();
+      alert (dates);  
+      console.log (dates);
  
   
     category_id = $("#cid option:selected").val();
@@ -292,17 +293,17 @@ $('.addExp').click(function(){
               data:{
                      _token:token,
                      ref:ref,
-                     date:from_dates,
+                     date:dates,
                      category_id:category_id,
                      item_id:item_id,
                      quantity:qty,
-                     price:price
+                     amount:price
 
                       },
 
                success:function(response) {
                       console.log(response);
-                      $('#item_table').append(response);
+                     $('#item_table').append(response);
                       // var number_count = 1; 
                       // $('$item_table').append("<tr>"+
                       // "<td class = 'text-center'>"+   +"<td>"+

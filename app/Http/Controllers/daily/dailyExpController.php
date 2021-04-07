@@ -84,37 +84,75 @@ class dailyExpController extends Controller
             'price' => 'required',
         ]);
 */
-//return $request->all();
+  //return $request->all();
       
-        //   return $request->date;
+       //  return $request->date;
         
        // $today = date('Y-m-d');
     
       $today = date('y-m-d', strtotime($request->date));
-     //  echo $today;
+   //     return $today;
 
 
 
-    //   $today = Carbon::parse($date)->format('y-m-d');
-      // return $today;
-
+     // $today = Carbon::parse($request->date)->format('y-m-d');
+   //   return $today;
+        
         
         $data= array();
         $data['date'] = $today;
         $data['expences_categoris_id' ] = $request->category_id;
         $data['expences_items_id']    = $request->item_id;
         $data['expences_items_quantity']   = $request->quantity;
-        $data['daily_expences_item_price'] = $request->price;
-        $data['daily_expences_total']  = $request->quantity*$request->price;
+        $data['daily_expences_item_price'] = $request->amount;
+        $data['daily_expences_total']  = $request->quantity*$request->amount;
         
-              DB::table('daily_expences')->insert($data);
-       // return redirect::to('/dashboard/daily/exp/manage')
-           //     ->with('Save','Daily Expenses Save Successfully'); ;
-       
-           
+
+      //  DB::table('daily_expences')->insert($data);
+        $last_id = DB::table('daily_expences')->insertGetId($data);
+      //   return  $last_id;
+
+        $get_daily_expences_info = $this->available_date_check($last_id);
+
+                //  echo '<pre>';
+                // print_r($get_daily_expences_info);
+                // exit();
+
+            //    return $get_daily_expences_info;
+
+        
+
+    if($get_daily_expences_info == null){
+            $data_one= array();
+            $data_one['date'] = $today;
+            $data_one['grand_total'] = $request->quantity*$request->amount;
+            DB::table('daily_expences_total')->insert($data_one);
+        }
+        else{
+
+            $sum_total = DB::table('daily_expences')
+                ->where('date', $today)
+                ->sum('daily_expences_total');
+
+                // echo 'sum pf total';
+                // echo '<pre>';
+                // print_r($sum_total);
+                // exit();
 
 
 
+            $data_two['grand_total']=$sum_total;
+                DB::table('daily_expences_total')
+                        ->where('date',$today)
+                        ->update($data_two);
+                
+        }
+
+
+
+      
+
+ 
            $all_expen = DB::table('daily_expences')
                         ->join('expences_categoris', 'daily_expences.expences_categoris_id', '=', 'expences_categoris.expences_categoris_id')
                         ->join('expences_items', 'daily_expences.expences_items_id', '=', 'expences_items.expences_items_id')
@@ -129,27 +167,49 @@ class dailyExpController extends Controller
                
                  $i=1;
                  foreach ($all_expen as $key => $exp) {
- 
                    echo '<tr><td class="text-center">'.$i .'</td><td class="text-center">'.$exp->expences_categoris_name .'</td><td class="text-center">'.$exp->expences_items_name .'</td><td class="text-center">'.$exp->expences_items_quantity .'</td><td class="text-center">'.$exp->daily_expences_item_price .'</td><td class="text-center">'.$exp->daily_expences_total .'</td> <td class="text-center"> Action</td></tr>';
                    $i++; 
                     
                 }
 
-/*
-                
-             
-               
-             
- 
-             
-                $i++; 
-
-*/
     }
 
-    
-    
-    
+
+
+
+    protected function available_date_check($id){
+
+        $get_date_by_id = DB::table('daily_expences')
+                    ->where('daily_expences_id', $id )
+                    ->first();
+
+              
+                //    echo '<pre>';
+                //    print_r($get_date_by_id);
+
+                  $current_date= $get_date_by_id->date;
+                //  echo $current_date;
+          //      return $current_date;
+
+
+                $get_date_by_date = DB::table('daily_expences_total')
+                                 ->where('date',  $current_date )
+                                 ->first();
+
+                // echo '<pre>';
+                // print_r($get_date_by_date);
+                // exit();
+
+                return $get_date_by_date;
+
+
+       
+    }
+
+
+
+
+  
     
     
     
