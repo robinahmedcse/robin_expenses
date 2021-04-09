@@ -24,10 +24,12 @@ class expItemController extends Controller
     
     
     
-             public function index() {
-                $this->admin_dashboard_check();    
+         public function index() {
+           $this->admin_dashboard_check();    
  
-                         $get_all_category_info =DB::table('expences_categoris')->get();
+               $get_all_category_info =DB::table('expences_categoris')
+                                        ->where('expences_categoris_status', '1')     
+                                        ->get();
          
           $category_info= view('supper_admin.exp.exp_item.createItem')
                ->with('get_all_category_info',$get_all_category_info);        

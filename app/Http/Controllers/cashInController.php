@@ -26,9 +26,12 @@ class cashInController extends Controller
    
    
         public function index() {
-                $this->admin_dashboard_check();  
+        
+          $this->admin_dashboard_check();  
                 
-         $get_all_cash_in_info =DB::table('cash_in_types')->get();
+         $get_all_cash_in_info =DB::table('cash_in_types')
+                                ->where('cash_in_type_status','1')                                 
+                                ->get();
          
           $cash_in_info= view('supper_admin.cashIn.createCashIn')
                ->with('get_all_cash_in_info',$get_all_cash_in_info);
@@ -65,7 +68,7 @@ class cashInController extends Controller
     
        
     public function manage() {
-               $this->admin_dashboard_check();         
+          $this->admin_dashboard_check();         
         
            $get_all_cash_in_info = DB::table('cash_in')
             ->join('cash_in_types', 'cash_in.cash_in_type_id', '=', 'cash_in_types.cash_in_type_id')

@@ -84,7 +84,7 @@ class dailyExpController extends Controller
       
       
       
-      public function store(Request $request) {
+      public function exp_store(Request $request) {
 /*
         $this->validate($request, [
             'category_id' => 'required',
@@ -218,8 +218,10 @@ class dailyExpController extends Controller
 
 
     
-    public function manage(){
+    public function exp_manage(){
         
+
+      $this->admin_dashboard_check();
         /*
            $get_all_daily_exp_info = DB::table('daily_expences')
             ->join('expences_items', 'daily_expences.expences_items_id', '=', 'expences_items.expences_items_id')

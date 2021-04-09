@@ -8,41 +8,85 @@
 @section('x')
  <div class="right_col" role="main"> 
 
-
-
-
+<h1 class="tex text-center text-success"> Start at 01 March 2021 </h1>
+            <div class="row top_tiles">
+             
+              <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
  
+                  <div class="count">{{$income}} TAKA </div>
+                  <h3>Total In</h3>
+          
+                </div>
+              </div>
+
+              <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+ 
+                  <div class="count">{{$spend}} TAKA</div>
+                  <h3>Total Expense</h3>
+               
+                </div>
+              </div>
+
+              <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+ 
+                  <div class="count">{{$total}} TAKA </div>
+                  <h3>Total Cash</h3>
+ 
+                </div>
+              </div>
+
+          
+
+            </div>
+
+
+
+
+<h3>Expense History</h3 >
+
             <div class="row top_tiles">
              
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">{{$income}} TAKA </div>
-                  <h3>Income</h3>
+                  <!-- <div class="icon"><i class="fa fa-caret-square-o-right"></i></div> -->
+                  <div class="count"> {{$yesterdayExpense}}.00 TK</div>
+                  <h3>Yesterday Expense</h3>
           
                 </div>
               </div>
 
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-comments-o"></i></div>
-                  <div class="count">{{$spend}} TAKA</div>
-                  <h3>Expencse</h3>
+                  <!-- <div class="icon"><i class="fa fa-comments-o"></i></div> -->
+                  <div class="count">{{$savenDaysExpense}}.00 TK </div>
+                  <h3>Last 07 Days Expense</h3>
                
                 </div>
               </div>
 
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
-                  <div class="count">{{$total}} TAKA </div>
-                  <h3>Cash</h3>
+                  <!-- <div class="icon"><i class="fa fa-sort-amount-desc"></i></div> -->
+                  <div class="count">{{$fifteenDaysExpense}}.00 TK </div>
+                  <h3>Last 15 Days Expense</h3>
  
                 </div>
               </div>
 
-           
 
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <!-- <div class="icon"><i class="fa fa-sort-amount-desc"></i></div> -->
+                  <div class="count">{{$thirtyDaysExpense}}.00 TK </div>
+                  <h3>Last 30 Days Expense</h3>
+ 
+                </div>
+              </div>
+              
+          
 
             </div>
 
@@ -51,8 +95,25 @@
 
 
 
+            <h3>Loan History</h3 >
 
 
+            <div class="row top_tiles">
+             
+             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+               <div class="tile-stats">
+                 <!-- <div class="icon"><i class="fa fa-caret-square-o-right"></i></div> -->
+                 <div class="count"> {{$total_loan_info}}.00 TK</div>
+                 <h3>Total Loan</h3>
+         
+               </div>
+             </div>
+
+ 
+ 
+
+
+           </div>
 
 
    
