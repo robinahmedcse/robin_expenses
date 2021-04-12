@@ -1,6 +1,6 @@
 @extends('supper_admin.master')
 
-@section('title','Cash In Info')
+@section('title','Report')
 
 
 
@@ -9,7 +9,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>cash in type info  <small></small></h3>
+                <h3>Cash In <small>report</small></h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -49,74 +49,58 @@
                         </ul>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="">
-                        <h4 class="tex text-center text-success">
-                            <?php
-                            echo Session::get('Save');
-                            session::put('Save', '');
-                            ?>
-                        </h4>
-                        <br><br>
-                    </div> 
                     <div class="x_content">
 
-                        <div align='right'>
-                            <a href="{{URL::to('dashboard/exp/category/add')}}">
-                                <button type="button" class="btn btn-success btn-info">
-                                    Add Cash in  
-                                </button>
-                            </a> 
-                        </div>
+                    <div class="">
+                        <h1 class="tex text-center text-success">
+                           Report form {{$s_date}} to {{$e_date}}
+                         </h1>
+                        <br> 
+                    </div> 
 
-                        <table id="datatable-keytable" class="table table-striped table-bordered"">
+                      <div class="table-responsive">
+                         <table class="table table-hover table-bordered"">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Type Name</th>
-                                    <th>Amount</th>
+                                    <th>Type</th>
                                     <th>Date</th>
-                                    <th> </th>
+                                    <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1; ?>
-                                @foreach($get_all_cash_in_info as $cash_in_info)
+                                <?php $i=1;
+                                      $j=0;
+                                ?>
+                                @foreach($cash_in_details as $daily_info)
                                 <tr>
-                                    <th scope="row">  <?php echo $i; ?></th>
-                                    <td>{{$cash_in_info->cash_in_type_name}}</td>
-                                    <td><b>{{$cash_in_info->cash_in_amount}} Taka</b> </td>
-                                    <td>{{$cash_in_info->created_at}}</td>
-
-
-                                    <td>
-
-                                        <a href="{{URL::to('admin/news/edit/'.$cash_in_info ->cash_in_type_id)}}" class="btn btn-success">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a> 
-
-                                        <a href="{{URL::to('admin/news/delete/'.$cash_in_info ->cash_in_type_id)}}" class="btn btn-danger"  onclick="return one_delete();">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-
-
-                                    </td>  
+                                    <th scope="row">  <?php echo $i;?></th>
+                                     <td>{{$daily_info->cash_in_type_name}}</td>
+                                     <td>{{$daily_info->created_at}}</td>
+                                     <td>{{$daily_info->cash_in_amount}}</td>
                                 </tr> 
-                                <?php $i++; ?>
-                                @endforeach()
-                            </tbody>
 
-                        </table>
+
+                                 <?php 
+                                        $j= $j+ $daily_info->cash_in_amount;
+                                        $i++;
+                                 
+                                 ?>
+                                @endforeach()
+                                <tr>
+                                <td colspan="4"  > </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"  > Total </td>
+                                    <td> <?php echo $j; ?>.00 BDT</td>
+                                </tr>
+                             </tbody>                        
+                          </table>
+                        </div>
 
                     </div>
                 </div>
             </div>
-
-
-
-
-            <div class="clearfix"></div>
-
-
         </div>
     </div>
 </div>

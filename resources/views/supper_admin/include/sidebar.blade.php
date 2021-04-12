@@ -70,13 +70,13 @@
                           <ul class="nav child_menu">
                             <li class="sub_menu"><a href="{{URL::to('/dashboard/report/cash/in/date/waise')}}">Date Waise</a>
                             </li>
-                            <li><a href="#level2_1">Category Waise</a>
+                            <li><a href="{{URL::to('/dashboard/report/cash/in/category/waise')}}">Category Waise</a>
                             </li>
-                            <li><a href="#level2_2">Loan Waise</a>
+                            <li><a href="{{URL::to('/dashboard/report/cash/in/loan/waise')}}">Loan Waise</a>
                             </li>
                           </ul>
                         </li>
-                      
+                       
                         <li><a>Exp. Report<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             <li class="sub_menu"><a href="level2.html">Date Waise </a>

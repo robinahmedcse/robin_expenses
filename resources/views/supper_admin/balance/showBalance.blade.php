@@ -62,22 +62,22 @@
                         <table class="table table-responsive table-bordered">
                             <thead>
                                 <tr>
-                                    
+
                                     <th>Income</th>
                                     <th>Spend</th>
                                     <th>Cash in my Hand</th>
                                 </tr>
                             </thead>
                             <tbody>
-                              
+
                                 <tr>
                                     <td>{{$income}} TAKA</td>
                                     <td>{{$spend}} TAKA</td>
                                     <td>{{$total}} TAKA</td>  
                                 </tr> 
-                            
+
                             </tbody>
-                            
+
                         </table>
 
                     </div>

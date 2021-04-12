@@ -26,7 +26,7 @@ class cashInReportController extends Controller
     public function cash_in_report_form(){
         $this->admin_dashboard_check();   
     
-        $report_info= view('supper_admin.report.cash_in.report_form');
+        $report_info= view('supper_admin.report.cash_in.date_wise.report_form');
         
          return view('supper_admin.master')->with('x',$report_info);
     }
@@ -57,7 +57,7 @@ class cashInReportController extends Controller
 //        print_r ($cash_in_details);
 //    exit();
 
-      $report_info= view('supper_admin.report.cash_in.report_manage')
+      $report_info= view('supper_admin.report.cash_in.date_wise.report_manage')
                    ->with('cash_in_details',$cash_in_details)
                    ->with ('s_date',$s_date)
                    ->with ('e_date',$e_date);

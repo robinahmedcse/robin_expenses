@@ -30,12 +30,12 @@
             <div class="login_wrapper">
                 <div class="animate form login_form">
                     <section class="login_content">
-                    
+
                         {!! Form::open(['url'=>'wp/supper/admin/reg/save','method'=>'POST' ]) !!}
-                              @csrf
-                              
+                        @csrf
+
                         <h1>Registration Form</h1>
-                        
+
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">First Name</label>
@@ -46,14 +46,14 @@
 
                                 @if ($errors->has('admin_f_name'))
                                 <span class="invalid-feedback" role="alert" style="color:red";>
-                                        <strong>{{ $errors->first('admin_f_name') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('admin_f_name') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
 
-                        
-                           <div class="form-group row">
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Last Name</label>
 
                             <div class="col-md-8">
@@ -61,15 +61,15 @@
                                        name="admin_l_name" value="{{ old('admin_l_name') }}" required autofocus>
 
                                 @if ($errors->has('admin_l_name'))
-                                    <span class="invalid-feedback" role="alert" style="color:red";>
-                                        <strong>{{ $errors->first('admin_l_name') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert" style="color:red";>
+                                    <strong>{{ $errors->first('admin_l_name') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
-                        
-                        
-                              <div class="form-group row">
+
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
 
                             <div class="col-md-8">
@@ -78,15 +78,15 @@
 
                                 @if ($errors->has('admin_username'))
                                 <span class="invalid-feedback" role="alert" style="color:red";>                                
-                                        <strong>{{ $errors->first('admin_username') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('admin_username') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
-                        
-                        
-                         
-                              <div class="form-group row">
+
+
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Phone Number</label>
 
                             <div class="col-md-8">
@@ -95,14 +95,14 @@
 
                                 @if ($errors->has('admin_phone'))
                                 <span class="invalid-feedback" role="alert" style="color:red";>
-                                        <strong>{{ $errors->first('admin_phone') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('admin_phone') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
-                        
-                        
-                        
+
+
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"> Email</label>
 
@@ -112,15 +112,15 @@
 
                                 @if ($errors->has('admin_email'))
                                 <span class="invalid-feedback" role="alert" style="color:red";>                              
-                                        <strong>{{ $errors->first('admin_email') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('admin_email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
-                        
-                        
-                        
-                        
+
+
+
+
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
@@ -131,20 +131,20 @@
 
                                 @if ($errors->has('admin_password'))
                                 <span class="invalid-feedback" role="alert" style="color:red";>
-                                        <strong>{{ $errors->first('admin_password') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('admin_password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
-              
- 
-                      
+
+
+
                         <br>
-                          <div>
-                          {{Form::submit('Save',
+                        <div>
+                            {{Form::submit('Save',
                               ['class'=>'btn btn-default ','name'=>'btn'])}} 
                         </div>
-                        
+
 
                         <div class="clearfix"></div>
 
@@ -153,7 +153,7 @@
 
                             <div>
                                 <h1><i class="fa fa-paw"></i> দিগপাইত শামসুল হক ডিগ্রী কলেজ</h1>
-                                  <p>©2019 All Rights Reserved. দিগপাইত শামসুল হক ডিগ্রী কলেজ ! is a Educational Site. Privacy and Terms</p>
+                                <p>©2019 All Rights Reserved. দিগপাইত শামসুল হক ডিগ্রী কলেজ ! is a Educational Site. Privacy and Terms</p>
                             </div>
                         </div>
                         {!! Form::close() !!}

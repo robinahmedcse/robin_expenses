@@ -50,20 +50,26 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="">
-                        <h4 class="tex text-center text-success">
-                            <?php
-                            echo Session::get('Save');
-                            session::put('Save', '');
-                            ?>
-                        </h4>
-               
+                        @if(Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ session::get('success') }} 
+                        </div>
+                        @endif 
+
+                        @if(Session::get('fail'))
+                        <div class="alert alert-danger">
+                            {{ session::get('fail') }} 
+                        </div>
+                        @endif
                     </div> 
-                    <div class="x_content">
+
+                </div> 
+                <div class="x_content">
                     <div class="">
                         <h2 class="tex text-center text-success">
-                          Total Expences Amount {{ $sum_total}}.00 Taka
+                            Total Expences Amount {{ $sum_total}}.00 Taka
                         </h2>
-                     
+
                     </div>
 
                     <div class="table-responsive">
@@ -77,12 +83,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1;?>
+                                <?php $i = 1; ?>
                                 @foreach($get_all_daily_exp_info as $daily_info)
                                 <tr>
-                                    <th scope="row">  <?php echo $i;?></th>
-                                     <td>{{$daily_info->date}}</td>
-                                     <td>{{$daily_info->grand_total}}.00 Taka </td>
+                                    <th scope="row">  <?php echo $i; ?></th>
+                                    <td>{{$daily_info->date}}</td>
+                                    <td>{{$daily_info->grand_total}}.00 Taka </td>
 
 
                                     <td>
@@ -90,28 +96,29 @@
                                             <span class="glyphicon glyphicon-eye-open"></span>
                                         </a> 
 
-                                        <a href="{{URL::to('/dashboard/daily/exp/delete/'.$daily_info ->daily_expences_total_id)}}" class="btn btn-danger"  onclick="return one_delete();">
+                                        <a href="{{URL::to('/dashboard/daily/exp/delete/by/'.$daily_info ->date)}}" class="btn btn-danger"  onclick="return one_delete();">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
+
                                     </td>  
                                 </tr> 
-                                 <?php $i++;?>
+                                <?php $i++; ?>
                                 @endforeach()
                             </tbody>
-                            
+
                         </table>
-                        </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-            <div class="clearfix"></div>
-
-
         </div>
+
+
+
+
+        <div class="clearfix"></div>
+
+
     </div>
+</div>
 </div>
 @endsection

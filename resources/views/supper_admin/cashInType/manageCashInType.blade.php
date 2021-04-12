@@ -59,13 +59,13 @@
                         <br><br>
                     </div> 
                     <div class="x_content">
-                            <div align='right'>
-                                <a href="{{URL::to('/dashboard/cash/in/type/add')}}">
-                                     <button type="button" class="btn btn-success btn-info">
-                                     Add Cash in type
-                                     </button>
-                                 </a> 
-                            </div>
+                        <div align='right'>
+                            <a href="{{URL::to('/dashboard/cash/in/type/add')}}">
+                                <button type="button" class="btn btn-success btn-info">
+                                    Add Cash in type
+                                </button>
+                            </a> 
+                        </div>
 
                         <table id="datatable-keytable" class="table table-striped table-bordered"">
                             <thead>
@@ -77,12 +77,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1;?>
+                                <?php $i = 1; ?>
                                 @foreach($get_all_cash_in_info as $cash_in_info)
                                 <tr>
-                                    <th scope="row">  <?php echo $i;?></th>
+                                    <th scope="row">  <?php echo $i; ?></th>
                                     <td>{{$cash_in_info->cash_in_type_name}}</td>
-                                 
+
 
 
 
@@ -110,10 +110,10 @@
 
                                     </td>  
                                 </tr> 
-                                 <?php $i++;?>
+                                <?php $i++; ?>
                                 @endforeach()
                             </tbody>
-                            
+
                         </table>
 
                     </div>

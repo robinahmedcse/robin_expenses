@@ -51,24 +51,24 @@
 
                         <input type="hidden" value="{{$news_by_id->newsId}}" name="news_Id" class="form-control col-md-7 col-xs-12" required>
 
- 
-						
-						     <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newsDescription">সংবাদের বিবরন <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <textarea class='form-control' name='newsDescription' row='8'>{{$news_by_id->newsDescription}}</textarea>
-                       <span class="text-danger">{{$errors->has('newsDescription')? $errors->first('newsDescription'):''}}</span>
-                </div>
-            </div> 
-					
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newsDescription">সংবাদের বিবরন <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class='form-control' name='newsDescription' row='8'>{{$news_by_id->newsDescription}}</textarea>
+                                <span class="text-danger">{{$errors->has('newsDescription')? $errors->first('newsDescription'):''}}</span>
+                            </div>
+                        </div> 
+
 
 
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">সংবাদের অবস্থা</label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                 
+
                                 <select name="publicationStatus" class="form-control" required>
                                     <option value="null">সংবাদের অবস্থা নিধারন করুন  </option>
                                     <option value="1">প্রকাশিত</option>
@@ -97,7 +97,7 @@
 </div>
 
 <script>
-      document.forms['myForm'].elements['publicationStatus'].value={{$news_by_id->publicationStatus}};
+    document.forms['myForm'].elements['publicationStatus'].value = {{$news_by_id - > publicationStatus}};
 </script>   
 
 @endsection

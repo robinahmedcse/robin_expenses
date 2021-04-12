@@ -16,6 +16,8 @@ use Carbon\Carbon;
 class dailyExpController extends Controller
 {
    
+    
+    
     protected function admin_dashboard_check() {
         session_start();
         $admin_id = Session::get('admin_id');
@@ -26,6 +28,9 @@ class dailyExpController extends Controller
         }
     }
 
+    
+    
+    
     
     public function index() {
         $this->admin_dashboard_check();
@@ -41,6 +46,10 @@ class dailyExpController extends Controller
     
     
    
+    
+    
+    
+    
     
       public function getItemName(Request $request) {
              //  return $request->all();
@@ -64,12 +73,18 @@ class dailyExpController extends Controller
     
       
 
+      
 
 
       public function getItemNames(Request $request) {
         return $request->all();
    
  }
+ 
+ 
+ 
+ 
+ 
 
  public function ref_check(Request $request) {
  // return $request->all();
@@ -85,23 +100,19 @@ class dailyExpController extends Controller
       
       
       public function exp_store(Request $request) {
-/*
-        $this->validate($request, [
-            'category_id' => 'required',
-            'item_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-        ]);
-*/
-  //return $request->all();
-      
+
+      //  $this->validate($request, [
+      //       'category_id' => 'required',
+      //       'item_id' => 'required',
+      //       'quantity' => 'required',
+      //       'price' => 'required',
+      //   ]);
+ 
        //  return $request->date;
-        
        // $today = date('Y-m-d');
     
       $today = date('y-m-d', strtotime($request->date));
-   //     return $today;
-
+ 
 
 
      // $today = Carbon::parse($request->date)->format('y-m-d');
@@ -174,12 +185,20 @@ class dailyExpController extends Controller
                     //    return $all_expen ;
                  //   return response()->json($all_expen);
                
+             //    $i=1;
+               //  foreach ($all_expen as $key => $exp) {
+                 //  echo '<tr><td class="text-center">'.$i .'</td> <td class="text-center">'.$exp->expences_items_name .'</td><td class="text-center">'.$exp->expences_items_quantity .'</td><td class="text-center">'.$exp->daily_expences_item_price .'</td><td class="text-center">'.$exp->daily_expences_total .'</td> <td class="text-center"> Action</td></tr>';
+                 //  $i++;   }
+				
+				
+			   echo '<table class="table table-responsive table-bordered" ><tr><th width="6%" class="text-center">#</th><th width="17%" class="text-center" >Item Name</th><th width="15%" class="text-center" >Item Quantity</th><th width="15%" class="text-center" >Unit Price</th> <th width="15%" class="text-center">Amount</th> <th width="15%" class="text-center">Action </th> </tr>';
                  $i=1;
                  foreach ($all_expen as $key => $exp) {
-                   echo '<tr><td class="text-center">'.$i .'</td> <td class="text-center">'.$exp->expences_items_name .'</td><td class="text-center">'.$exp->expences_items_quantity .'</td><td class="text-center">'.$exp->daily_expences_item_price .'</td><td class="text-center">'.$exp->daily_expences_total .'</td> <td class="text-center"> Action</td></tr>';
+                      echo'<tr><td width="6%" class="text-center">'.$i .'</td> <td width="17%" class="text-center">'.$exp->expences_items_name .'</td><td width="15%" class="text-center">'.$exp->expences_items_quantity .'</td><td width="15%" class="text-center">'.$exp->daily_expences_item_price .'</td><td width="15%" class="text-center">'.$exp->daily_expences_total .'</td> <td width="15%" class="text-center"> --</td></tr>';
                    $i++; 
                     
                 }
+                echo'</table>';
 
     }
 
@@ -250,9 +269,7 @@ $get_all_daily_exp_info = DB::table('daily_expences_total')
                           ->with('get_all_daily_exp_info',$get_all_daily_exp_info);
            
             return view('supper_admin.master')->with('x',$daily_info);
-    
-       
-       
+      
     }
     
     
@@ -260,11 +277,49 @@ $get_all_daily_exp_info = DB::table('daily_expences_total')
 
 
 
+    public function exp_delete_by_date($date){
+
+        $delete_1 =  DB::table('daily_expences')
+                  ->where('date',$date)
+                  ->delete();
+
+         $delete_2 = DB::table('daily_expences_total')
+                  ->where('date',$date)
+                  ->delete();
+
+
+                 
+           if($delete_1){
+                    if($delete_2){
+                      return back()->with('success','Delete succesfully.');
+                    }else{
+                        return back()->with('fail','Not Possible');
+                    }
+
+          }else{
+             return back()->with('fail','Sorry not possible to delete');
+        }
+
+        /// exp_delete_by_date
+    }
+
+
+
+
+
+
     public function exp_view_by_date($date){
 
         $get_all_daily_exp_info = DB::table('daily_expences')
-                                ->where('date',  $date )
-                                ->get();
+                                  ->join('expences_items', 'daily_expences.expences_items_id', '=', 'expences_items.expences_items_id')
+                                  ->select('daily_expences.*', 'expences_items.expences_items_name')
+                                  ->where('date',  $date )
+                                  ->get();
+        
+        
+//        echo"<pre>";
+//        print_r($get_all_daily_exp_info);
+//        exit();
 
           $sum_total = DB::table('daily_expences')
                         ->where('date', $date)
@@ -279,6 +334,59 @@ $get_all_daily_exp_info = DB::table('daily_expences_total')
     }
     
     
+     
+    
+      public function exp_view_edit_by_id(Request $request) {
+            return $request->all();
+      }
+      
+            public function exp_view_update_by_id(Request $request) {
+    //    return $request->all();
+            
+            $date = $request->date;
+            $id =$request->id; 
+            
+                         $qty =$request->qty; 
+                         $price =$request->amount; 
+                         $total=  $qty * $price ;
+
+            
+       //     $data_two['grand_total']=$sum_total;
+         $update_1=DB::table('daily_expences')
+                        ->where([
+                            ['date', '=', $date],
+                            ['daily_expences_id', '=', $id]
+                        ])
+                       ->update([
+                             'expences_items_quantity' => $qty,
+                             'daily_expences_item_price' => $price,
+                             'daily_expences_total' => $total
+                           ]);
+
+              
+                  $sum_total = DB::table('daily_expences')
+                               ->where('date', $date)
+                               ->sum('daily_expences_total');
+  
+                
+                
+           if($update_1){
+               
+                        $data_two['grand_total']=$sum_total;
+                        $update_2 =DB::table('daily_expences_total')
+                                    ->where('date',$date)
+                                    ->update($data_two);
+                        
+                    if($update_2){
+                      return back()->with('success','update succesfully.');
+                    }else{
+                        return back()->with('fail','Not Possible');
+                    }
+
+          }else{
+             return back()->with('fail','Sorry not possible to update');
+        }
+      }
     
     
     
