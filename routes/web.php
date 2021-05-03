@@ -45,6 +45,36 @@ Route::get('/dashboard/cash/in/manage', 'cashInController@manage');
 // -------------------------------------End of cash in ---------------------------------------
 
 
+// -------------------------------------person-----------------------------------------------
+Route::get('/dashboard/loan/person/add', 'personController@person_add_form');
+Route::post('/dashboard/loan/person/store', 'personController@person_save');
+
+Route::get('/dashboard/loan/person/manage', 'personController@person_manage');
+
+Route::get('/dashboard/loan/person/edit/{id}', 'personController@edit_person');
+Route::post('/dashboard/loan/person/update', 'personController@update_person');
+Route::get('/dashboard/loan/person/delete/{id}', 'personController@delete_person');
+ 
+// -------------------------------------End person ---------------------------------------
+
+
+// -------------------------------------Loan in-------------------------------------------
+Route::get('/dashboard/loan/in/add', 'loanController@loan_in_index');
+Route::post('/dashboard/loan/in/save', 'loanController@loan_in_store');
+Route::get('/dashboard/loan/in/manage', 'loanController@loan_in_manage');
+
+Route::get('/dashboard/loan/in/edit/{loan_id}', 'loanController@loan_in_edit');
+Route::post('/dashboard/loan/in/update', 'loanController@loan_in_update');
+
+Route::get('/dashboard/loan/status/change/to/pay/{loan_id}', 'loanController@loan_in_paid');
+Route::get('/dashboard/loan/status/change/to/due/{loan_id}', 'loanController@loan_in_unpaid');
+
+// -------------------------------------End Loan in---------------------------------------
+
+
+
+ 
+
  // -------------------------------------Exp Category------------------------------------------
 Route::get('/dashboard/exp/category/add', 'exp\expCategoryController@index');
 Route::post('/dashboard/exp/category/save', 'exp\expCategoryController@store');

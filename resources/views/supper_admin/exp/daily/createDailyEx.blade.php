@@ -65,7 +65,7 @@
                                 Date <span class="required">*</span>
                             </label>
                             <div class="col-md-9  col-sm-9 col-xs-12 form-group">
-                                <input type="text" class="form-control" name="date" id="date" data-inputmask="'mask': '99/99/9999'">   
+                                <input type="text" class="form-control" name="date" placeholder="00-01-2000" id="date"  >   
                             </div>
                         </div>
 

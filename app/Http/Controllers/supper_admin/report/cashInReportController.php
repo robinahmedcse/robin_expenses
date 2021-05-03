@@ -37,10 +37,10 @@ class cashInReportController extends Controller
        // return $request->all();
   
       $s_date=  date('d-m-Y', strtotime($request->s_date));
-      $start_day = date('y-d-m', strtotime($request->s_date)); 
+      $start_day = date('Y-m-d', strtotime($request->s_date)); 
 
       $e_date = date('d-m-Y', strtotime($request->e_date));
-      $end_day = date('y-d-m', strtotime($request->e_date)); 
+      $end_day = date('Y-m-d', strtotime($request->e_date)); 
       
     //   echo $start_day; 
     //   echo"<br>";

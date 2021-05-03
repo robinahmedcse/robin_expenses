@@ -108,10 +108,10 @@ class dailyExpController extends Controller
       //       'price' => 'required',
       //   ]);
  
-       //  return $request->date;
+       // return $request->date;
        // $today = date('Y-m-d');
     
-      $today = date('y-m-d', strtotime($request->date));
+      $today = date('Y-m-d', strtotime($request->date));
  
 
 
@@ -247,26 +247,37 @@ class dailyExpController extends Controller
             ->select('daily_expences.*', 'expences_items.expences_items_name')
             ->orderBy('daily_expences.daily_expences_id', 'DESC')
             ->get();
-           
-//       echo'<pre>';
-//       print_r($get_all_daily_exp_info);
-//       exit();
-       
-
+ 
 */
+
 $get_all_daily_exp_info = DB::table('daily_expences_total')
                     ->orderBy('daily_expences_total.daily_expences_total_id', 'DESC')
                     ->get();
+                    
 
-    //    echo'<pre>';
-    //   print_r($get_all_daily_exp_info);
-    //   exit();
-    $sum_total = DB::table('daily_expences')
-                 ->sum('daily_expences_total');
+          $in_taka= DB::table('cash_in')
+                    ->sum('cash_in_amount');
+          
+          $loan = DB::table('loans')
+                    ->sum('loan_amount');
+          
+          
+          $income = $in_taka + $loan;
+            
+          $spend = DB::table('daily_expences')
+                    ->sum('daily_expences_total');
+          
+          $blance=$income-$spend;
+ 
+ 
+
+ 
+       $total=$income-$spend;
  
               $daily_info= view('supper_admin.exp.daily.manageDailyExp')
-                         ->with('sum_total',$sum_total)
-                          ->with('get_all_daily_exp_info',$get_all_daily_exp_info);
+                         ->with('spend',$spend)
+                          ->with('get_all_daily_exp_info',$get_all_daily_exp_info)
+                          ->with('blance',$blance);
            
             return view('supper_admin.master')->with('x',$daily_info);
       

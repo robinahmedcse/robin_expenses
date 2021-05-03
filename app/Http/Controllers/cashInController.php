@@ -52,11 +52,13 @@ class cashInController extends Controller
         ]);
 
      // return  $request->all();
-
+       $current_date = date("Y-m-d");
       
         $data=array();
         $data['cash_in_type_id']= $request->cash_in_type_id;
         $data['cash_in_amount']= $request->cash_in_amount;
+        $data['created_at']=   $current_date ;
+        
  
   
         DB::table('cash_in')->insert($data);
