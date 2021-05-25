@@ -1,6 +1,6 @@
 @extends('supper_admin.master')
 
-@section('title','Daily expences')
+@section('title','Report | Cash In ')
 
 
 
@@ -9,7 +9,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>All  <small>Expences</small></h3>
+                <h3>Cash in  <small>Report</small></h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -49,15 +49,7 @@
                         </ul>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="">
-                        <h4 class="tex text-center text-success">
-                            <?php
-                            echo Session::get('Save');
-                            session::put('Save', '');
-                            ?>
-                        </h4>
-                        <br><br>
-                    </div> 
+              
                     <div class="x_content">
                         
                     
@@ -142,40 +134,6 @@
         </div>
     </div>
 
-
-<script type="text/javascript">
-       $(document).ready(function(){  
-             $('select[name="date"]').on ('change',function(){
-                        var id=$(this).val();
-                        console.log(id);
-                         token=$('#token_dis').val();
-                                 console.log(token);
-                         if(id){
-                             $.ajax({
-                                    type:'post',
-                                    url:'{{URL::to("/dashboard/get/per/day/date/1")}}',
-                                         data:{
-                                                date:id ,
-                                                _token:token
-                                               },
-
-                                    success:function(response)
-                                            {
-                                              
-                                            console.log(response);
-                                         $('#item_table').html(response);
-                                            }
-
-                                });
-                         }
-                         else{
-                             alert ('Danger');
-                         }
  
-             
-               });
-            });
-</script>
-
 
 @endsection

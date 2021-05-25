@@ -175,7 +175,7 @@
                                     <th width="15%" class="text-center" >Item Quantity</th>
                                     <th width="15%" class="text-center" >Unit Price</th>
                                     <th width="15%" class="text-center">Amount</th>
-                                    <th width="5%" class="text-center"> Action </th>
+                   
                                 </tr>
 
                             </table>

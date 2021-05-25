@@ -1,6 +1,6 @@
 @extends('supper_admin.master')
 
-@section('title','Report | view ')
+@section('title','Report | view (cash In) ')
 
 
 
@@ -52,9 +52,11 @@
                     <div class="x_content">
 
                     <div class="">
-                        <h1 class="tex text-center text-success">
-                           Report form {{$s_date}} to {{$e_date}}
-                         </h1>
+                        <h3 class="tex text-center text-success">
+                              Report by  Category Name : <u>{{$category_name->cash_in_type_name}}</u>
+                        </h3>
+                        
+                         <p class="tex text-center text-success">  Report form {{$s_date}} to {{$e_date}} </p>
                         <br> 
                     </div> 
 

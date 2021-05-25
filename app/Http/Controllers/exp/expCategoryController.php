@@ -68,9 +68,7 @@ class expCategoryController extends Controller
            $get_all_cate_info =DB::table('expences_categoris')
                    ->orderBy('expences_categoris_id', 'DESC')
                   ->get();
-                  //    ->select('*');
-                 //      ->all();
-                //  ->paginate(15);
+ 
 //       
 //       echo'<pre>';
 //       print_r($get_all_cate_info);

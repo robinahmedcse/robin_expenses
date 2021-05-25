@@ -1,6 +1,6 @@
 @extends('supper_admin.master')
 
-@section('title','Daily expences')
+@section('title','Report | Cash In ')
 
 
 
@@ -9,7 +9,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>All  <small>Expences</small></h3>
+                <h3>Cash <small>In</small></h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -28,10 +28,10 @@
         <div class="row">
             <div class="clearfix"></div>
 
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-
+                         <h2>Search with <small>Date</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -62,10 +62,24 @@
                         
                     
                         
-                    {!! Form::open(['url'=>'/dashboard/report/cash/in/date/waise/search','method'=>'POST','class'=>'form-horizontal form-label-left']) !!}    
+                    {!! Form::open(['url'=>'/dashboard/report/cash/in/category/date/waise/search','method'=>'POST','class'=>'form-horizontal form-label-left']) !!}    
                    
+
+                    <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Cash In Category</label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select name="cash_in_type_id" class="form-control">
+                                    <option value="null">Select Cash In Catrgories</option>
+                                    @foreach($get_all_cash_in_info as $cashInTypeInfo)
+                                    <option value="{{ $cashInTypeInfo ->cash_in_type_id }}">{{ $cashInTypeInfo ->cash_in_type_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>  
+
+
              
-                    <div class="form-group col-md-5 col-sm-5 col-xs-12 " >
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12 " >
                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
                           Start Date <span class="required">*</span>
                         </label>
@@ -90,7 +104,7 @@
                     </div>
 
 
-                    <div class="form-group col-md-5 col-sm-5 col-xs-12 " >
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12 " >
                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
                           End Date <span class="required">*</span>
                         </label>
@@ -119,9 +133,75 @@
 
                     <input type="hidden" id="token_dis" name="token_admin" value="{{ csrf_token()}}">
 
-
+                    <br><br>
                       <div class="form-group">
-                        <div class="col-md-2 col-sm-2 col-xs-12  ">
+                       <label class="control-label col-md-4 col-sm-4 col-xs-12"> </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <button type="submit" class="btn btn-success addExp">Search</button>
+                        </div>
+                      </div>
+  
+   
+                      {!! Form::close() !!}  
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                            <h2>Search Without <small>Date</small></h2>
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+              
+                    <div class="x_content">
+                        
+                    
+                        
+                    {!! Form::open(['url'=>'/dashboard/report/cash/in/category/waise/search','method'=>'POST','class'=>'form-horizontal form-label-left']) !!}    
+                   
+
+                    <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Select Cash In Category</label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select name="cash_in_type_id" class="form-control">
+                                    <option value="null">Select Cash In Catrgories</option>
+                                    @foreach($get_all_cash_in_info as $cashInTypeInfo)
+                                    <option value="{{ $cashInTypeInfo ->cash_in_type_id }}">{{ $cashInTypeInfo ->cash_in_type_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>  
+
+
+                   
+                      <div class="form-group">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12"> </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
                           <button type="submit" class="btn btn-success addExp">Search</button>
                         </div>
                       </div>
@@ -142,40 +222,7 @@
         </div>
     </div>
 
-
-<script type="text/javascript">
-       $(document).ready(function(){  
-             $('select[name="date"]').on ('change',function(){
-                        var id=$(this).val();
-                        console.log(id);
-                         token=$('#token_dis').val();
-                                 console.log(token);
-                         if(id){
-                             $.ajax({
-                                    type:'post',
-                                    url:'{{URL::to("/dashboard/get/per/day/date/1")}}',
-                                         data:{
-                                                date:id ,
-                                                _token:token
-                                               },
-
-                                    success:function(response)
-                                            {
-                                              
-                                            console.log(response);
-                                         $('#item_table').html(response);
-                                            }
-
-                                });
-                         }
-                         else{
-                             alert ('Danger');
-                         }
  
-             
-               });
-            });
-</script>
 
 
 @endsection

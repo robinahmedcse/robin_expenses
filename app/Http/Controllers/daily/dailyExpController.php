@@ -35,13 +35,61 @@ class dailyExpController extends Controller
     public function index() {
         $this->admin_dashboard_check();
         
-    $get_all_category_info =DB::table('expences_categoris')->get();
+        
+    $total_amount =  $this->balanc_check();
+      
+    //  return $total_amount;
+      
+      
+    //  $total_amount = "0";
+      
+      
+      
+      if( $total_amount == "0"){
+         
+          $index_info= view('supper_admin.exp.daily.blank');      
+         return view('supper_admin.master')->with('x',$index_info);
+         
+         
+          
+      }else{
+              $get_all_category_info =DB::table('expences_categoris')->get();
     
     $get_all_category_info= view('supper_admin.exp.daily.createDailyEx')
                ->with('get_all_category_info',$get_all_category_info);     
         
         
          return view('supper_admin.master')->with('x',$get_all_category_info);
+      }
+        
+// end of index
+
+    }
+    
+    
+    
+    
+    
+    protected function balanc_check() {
+             $in_taka= DB::table('cash_in')
+                   ->sum('cash_in_amount');
+         
+         $loan = DB::table('loans')
+                ->where('loan_status', 'Un-paid')
+                ->sum('loan_amount');
+                 
+         
+         
+         $income = $in_taka + $loan;
+           
+         $spend = DB::table('daily_expences')
+                   ->sum('daily_expences_total');
+           
+
+         $total=$income-$spend;
+         
+         
+         return $total;
     }
     
     
@@ -108,12 +156,12 @@ class dailyExpController extends Controller
       //       'price' => 'required',
       //   ]);
  
-       // return $request->date;
+        // return $request->date;
        // $today = date('Y-m-d');
     
       $today = date('Y-m-d', strtotime($request->date));
  
-
+		//return    $today ;
 
      // $today = Carbon::parse($request->date)->format('y-m-d');
    //   return $today;
@@ -191,13 +239,16 @@ class dailyExpController extends Controller
                  //  $i++;   }
 				
 				
-			   echo '<table class="table table-responsive table-bordered" ><tr><th width="6%" class="text-center">#</th><th width="17%" class="text-center" >Item Name</th><th width="15%" class="text-center" >Item Quantity</th><th width="15%" class="text-center" >Unit Price</th> <th width="15%" class="text-center">Amount</th> <th width="15%" class="text-center">Action </th> </tr>';
+			   echo '<table class="table table-responsive table-bordered" ><tr><th width="6%" class="text-center">#</th><th width="17%" class="text-center" >Item Name</th><th width="15%" class="text-center" >Item Quantity</th><th width="15%" class="text-center" >Unit Price (BDT)</th> <th width="15%" class="text-center">Amount (BDT)</th>   </tr>';
                  $i=1;
+                 $sum=0;
                  foreach ($all_expen as $key => $exp) {
-                      echo'<tr><td width="6%" class="text-center">'.$i .'</td> <td width="17%" class="text-center">'.$exp->expences_items_name .'</td><td width="15%" class="text-center">'.$exp->expences_items_quantity .'</td><td width="15%" class="text-center">'.$exp->daily_expences_item_price .'</td><td width="15%" class="text-center">'.$exp->daily_expences_total .'</td> <td width="15%" class="text-center"> --</td></tr>';
+                      echo'<tr><td width="6%" class="text-center">'.$i .'</td> <td width="17%" class="text-center">'.$exp->expences_items_name .'</td><td width="15%" class="text-center">'.$exp->expences_items_quantity .'</td><td width="15%" class="text-center">'.$exp->daily_expences_item_price .'</td><td width="15%" class="text-center">'.$exp->daily_expences_total .'</td>  </tr> ';
                    $i++; 
+                   $sum = $exp->daily_expences_total + $sum;
                     
                 }
+                echo'<tr><td width="66.66%" class="text-center" colspan="4">Total Amount (BDT)</td> <td width="33.33%" class="text-center">'. $sum.'</td></tr>';
                 echo'</table>';
 
     }
@@ -259,20 +310,28 @@ $get_all_daily_exp_info = DB::table('daily_expences_total')
                     ->sum('cash_in_amount');
           
           $loan = DB::table('loans')
-                    ->sum('loan_amount');
+                ->where('loan_status', 'Un-paid')
+                ->sum('loan_amount');
           
           
           $income = $in_taka + $loan;
+		  
+		 //  echo   $income ;
+		 //  echo '<br>';
             
           $spend = DB::table('daily_expences')
                     ->sum('daily_expences_total');
-          
+           
+		 //  echo   $spend;
+		 //  echo '<br>';
+		   
           $blance=$income-$spend;
- 
+		  
+		//  echo  $blance;
+		//  exit();
  
 
  
-       $total=$income-$spend;
  
               $daily_info= view('supper_admin.exp.daily.manageDailyExp')
                          ->with('spend',$spend)

@@ -30,13 +30,49 @@ class expItemController extends Controller
                $get_all_category_info =DB::table('expences_categoris')
                                         ->where('expences_categoris_status', '1')     
                                         ->get();
-         
-          $category_info= view('supper_admin.exp.exp_item.createItem')
-               ->with('get_all_category_info',$get_all_category_info);        
+       
+              $category_info= view('supper_admin.exp.exp_item.createItem')
+                       ->with('get_all_category_info',$get_all_category_info);  
+ 
+
+      
                 
+
                     return view('supper_admin.master')->with('x',$category_info);
     }
    
+
+
+
+
+
+    public function getAllItemName(Request $request) {
+      //  return $request->all();
+     $cat_id=$request->id;  
+      $allItemInfo = DB::table('expences_items')
+          ->where('expences_categoris_id',$cat_id)
+          ->select('expences_items_id', 'expences_items_name')
+          ->orderBy('expences_items_id', 'DESC')
+          ->get();
+//         
+//                    echo '<pre>';
+//                    print_r($allItemInfo);
+//                    exit();
+
+
+      $i = 1;
+      foreach ($allItemInfo as $key => $item) {
+          echo '<h2>'. $i.'.'. $item->expences_items_name .'</h2>';
+          $i++;
+      }
+   
+}
+
+
+
+
+
+
     
         
     public function store(Request $request) {

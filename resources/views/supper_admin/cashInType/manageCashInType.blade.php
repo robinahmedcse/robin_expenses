@@ -50,13 +50,19 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="">
-                        <h4 class="tex text-center text-success">
-                            <?php
-                            echo Session::get('Save');
-                            session::put('Save', '');
-                            ?>
-                        </h4>
-                        <br><br>
+                       
+                        @if(Session::get('success'))
+                            <div class="alert alert-success">
+                                {{ session::get('success') }} 
+                            </div>
+                            @endif 
+
+                            @if(Session::get('fail'))
+                            <div class="alert alert-danger">
+                                {{ session::get('fail') }} 
+                            </div>
+                            @endif
+                      
                     </div> 
                     <div class="x_content">
                         <div align='right'>
@@ -99,11 +105,11 @@
                                             </a>
                                         <?php } ?>
 
-                                        <a href="{{URL::to('admin/news/edit/'.$cash_in_info ->cash_in_type_id)}}" class="btn btn-success">
+                                        <a href="{{URL::to('/dashboard/cash/in/type/edit/'.$cash_in_info ->cash_in_type_id)}}" class="btn btn-success">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a> 
 
-                                        <a href="{{URL::to('admin/news/delete/'.$cash_in_info ->cash_in_type_id)}}" class="btn btn-danger"  onclick="return one_delete();">
+                                        <a href="{{URL::to('/dashboard/cash/in/type/delete/'.$cash_in_info ->cash_in_type_id)}}" class="btn btn-danger"  onclick="return one_delete();">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
 

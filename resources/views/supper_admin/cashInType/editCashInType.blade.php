@@ -1,5 +1,5 @@
 @extends('supper_admin.master')
-@section('title','Create Cash In')
+@section('title','Edit Cash In')
 
 
 @section('x')
@@ -16,7 +16,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Cash In Type<small>Add from</small></h2>
+                        <h2>Cash In Type<small>edit from</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -51,16 +51,18 @@
                         </div> 
                         <br />
 
-                        {!! Form::open(['url'=>'/dashboard/cash/in/type/save','method'=>'POST','class'=>'form-horizontal form-label-left']) !!}    
+                        {!! Form::open(['url'=>'/dashboard/cash/in/type/update','method'=>'POST','name'=>'editForm','class'=>'form-horizontal form-label-left']) !!}    
                         <!-- Category name -->
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cash_in_type_name">Name (cash in Type) <span class="required" >*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="t_name" name="cash_in_type_name" value="{{ old('cash_in_type_name')}}" required
+                                <input type="text" id="t_name" name="cash_in_type_name" value="{{$get_cash_in_info_by_id -> cash_in_type_name}}" required
                                        class="form-control{{ $errors->has('cash_in_type_name') ? ' is-invalid' : '' }}" >   
 
+
+                                <input type ="hidden" name="cash_in_id"  value= {{$get_cash_in_info_by_id -> cash_in_type_id}} >
                                 @if ($errors->has('cash_in_type_name'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong style="color:red">{{ $errors->first('cash_in_type_name') }}</strong>
@@ -74,7 +76,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cash_in_description">Description (cash in type) <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea class='form-control' name='cash_in_description' row='8' placeholder=''></textarea>
+                                <textarea class='form-control' name='cash_in_description' row='8' placeholder=''>{{$get_cash_in_info_by_id -> cash_in_description}}</textarea>
                                 <span class="text-danger">{{$errors->has('cash_in_description')? $errors->first('cash_in_description'):''}}</span>
                             </div>
                         </div> 
@@ -110,4 +112,20 @@
         </div>
     </div>
 </div>
+
+
+
+
+    <script>
+          document.forms['editForm'].elements['cash_in_type_status'].value= "{{$get_cash_in_info_by_id->cash_in_type_status}}";
+    </script>
+
+
 @endsection
+
+
+
+
+
+
+

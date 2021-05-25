@@ -73,11 +73,11 @@
                   <br />
 
                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Status (cash in type)</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Status (Category type)</label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                  
                                 <select name="category_status" class="form-control" required>
-                                    <option value="null">Cash in type status</option>
+                                    <option value="null">Category type status</option>
                                     <option value="1">Published</option>
                                     <option value="0">Un-published</option>
                                 </select>

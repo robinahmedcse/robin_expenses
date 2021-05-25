@@ -6,7 +6,8 @@
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
+| routes are loaded by the RouteServiceProvider within 
+0a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -35,6 +36,10 @@ Route::get('/dashboard/cash/in/type/add', 'cashInTypeController@index');
 Route::post('/dashboard/cash/in/type/save', 'cashInTypeController@store');
 Route::get('/dashboard/cash/in/type/manage', 'cashInTypeController@manage');
 
+Route::get('/dashboard/cash/in/type/edit/{id}', 'cashInTypeController@edit');
+Route::post('/dashboard/cash/in/type/update', 'cashInTypeController@update');
+Route::get('/dashboard/cash/in/type/delete/{id}', 'cashInTypeController@delete');
+
 // -------------------------------------end of cash in type ----------------------------------------
  
 
@@ -42,6 +47,9 @@ Route::get('/dashboard/cash/in/type/manage', 'cashInTypeController@manage');
 Route::get('/dashboard/cash/in/add', 'cashInController@index');
 Route::post('/dashboard/cash/in/save', 'cashInController@store');
 Route::get('/dashboard/cash/in/manage', 'cashInController@manage');
+
+Route::get('/dashboard/cash/in/edit/cash_in/{id}/type/{type_id}', 'cashInController@edit');
+Route::post('/dashboard/cash/in/update', 'cashInController@update');
 // -------------------------------------End of cash in ---------------------------------------
 
 
@@ -86,6 +94,7 @@ Route::get('/dashboard/exp/category/manage', 'exp\expCategoryController@manage')
 
  // -------------------------------------Exp Item----------------------------------------------
 Route::get('/dashboard/exp/item/add', 'exp\expItemController@index');
+Route::get('/dashboard/exp/item/add/all/item/name', 'exp\expItemController@getAllItemName');
 Route::post('/dashboard/exp/item/save', 'exp\expItemController@store');
 Route::get('/dashboard/exp/item/manage', 'exp\expItemController@manage');
 // -------------------------------------End Exp Item-------------------------------------------
@@ -129,10 +138,17 @@ Route::get('/dashboard/report/cash/in/date/waise', 'supper_admin\report\cashInRe
 Route::post('/dashboard/report/cash/in/date/waise/search', 'supper_admin\report\cashInReportController@cash_in_report_search');
 //  ---------
 Route::get('/dashboard/report/cash/in/category/waise', 'supper_admin\report\cashInReportController@category_wise_cash_in_report_form');
-Route::post('/dashboard/report/cash/in/category/waise/search', 'supper_admin\report\cashInReportController@category_wise_cash_in_report_search');
+
+Route::post('/dashboard/report/cash/in/category/date/waise/search', 'supper_admin\report\cashInReportController@Category_wise_report_search_with_date');
+
+Route::post('/dashboard/report/cash/in/category/waise/search', 'supper_admin\report\cashInReportController@category_wise_report_search_without_date');
+
+
+
+
 //  ---------
-Route::get('/dashboard/report/cash/in/loan/waise', 'supper_admin\report\cashInReportController@loan_wise_cash_in_report_form');
-Route::post('/dashboard/report/cash/in/loan/waise/search', 'supper_admin\report\cashInReportController@loan_wise_cash_in_report_search');
+// Route::get('/dashboard/report/cash/in/loan/waise', 'supper_admin\report\cashInReportController@loan_wise_cash_in_report_form');
+// Route::post('/dashboard/report/cash/in/loan/waise/search', 'supper_admin\report\cashInReportController@loan_wise_cash_in_report_search');
 
 // -------------------------------------End  Cash In Report----------------------------------------------
  

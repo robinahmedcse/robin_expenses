@@ -74,12 +74,13 @@ class cashInController extends Controller
         
            $get_all_cash_in_info = DB::table('cash_in')
             ->join('cash_in_types', 'cash_in.cash_in_type_id', '=', 'cash_in_types.cash_in_type_id')
-            ->select('cash_in.*', 'cash_in_types.cash_in_type_name')
+            ->select('cash_in.*', 'cash_in_types.cash_in_type_name','cash_in_types.cash_in_type_id')
+            ->orderBy('cash_in_id', 'DESC')
             ->get();
            
-//       echo'<pre>';
-//       print_r($get_all_cash_in_info);
-//       exit();
+      // echo'<pre>';
+      // print_r($get_all_cash_in_info);
+      // exit();
              
        
        if($get_all_cash_in_info == null){
@@ -97,15 +98,48 @@ class cashInController extends Controller
     }
     
     
-    
-    public function edit() {
+
+public function edit($cash_in_id, $type_id) {
+
+  return back()->with('fail','Edit is not possible right now');
+
+
+     //   return $cash_in_id;
+
+   //     return $type_id;
+
+    $get_all_cash_in_info = DB::table('cash_in_types')
+                              ->where('cash_in_type_status','1')                                 
+                              ->get();
+
+
+    $cash_in_info = DB::table('cash_in')
+                     ->where('cash_in_id',$cash_in_id)                                    
+                     ->first();
+
+
+
+    $cash_in_info= view('supper_admin.cashIn.editCashIn')
+                ->with('get_all_cash_in_info',$get_all_cash_in_info)
+                ->with('cash_in_info',$cash_in_info);
         
-    }
+   return view('supper_admin.master')->with('x',$cash_in_info);
+
+
+
+    
+
+
+
+
+    //end edit 
+}
+
+ 
     
     
-    
-    public function update() {
-        
+    public function update(Request $request) {
+      return $request;
     }
     
     

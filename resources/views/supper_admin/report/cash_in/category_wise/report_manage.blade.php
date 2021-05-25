@@ -1,6 +1,6 @@
 @extends('supper_admin.master')
 
-@section('title','Report')
+@section('title','Report |view (Cash In)')
 
 
 
@@ -53,17 +53,21 @@
 
                     <div class="">
                         <h1 class="tex text-center text-success">
-                           Report form {{$s_date}} to {{$e_date}}
+                         Report by  Category Name : <u>{{$category_name->cash_in_type_name}}</u>
                          </h1>
+                         
+                         <p class="tex text-center text-success">Report from 01 March 2021 to Today </p>
+
+
                         <br> 
                     </div> 
 
                       <div class="table-responsive">
-                         <table class="table table-hover table-bordered"">
+                         <table id="datatable-keytable" class="table table-striped table-bordered"">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Type</th>
+                      
                                     <th>Date</th>
                                     <th>Amount</th>
                                 </tr>
@@ -73,29 +77,35 @@
                                       $j=0;
                                 ?>
                                 @foreach($cash_in_details as $daily_info)
-                                <tr>
-                                    <th scope="row">  <?php echo $i;?></th>
-                                     <td>{{$daily_info->cash_in_type_name}}</td>
-                                     <td>{{$daily_info->created_at}}</td>
-                                     <td>{{$daily_info->cash_in_amount}}</td>
-                                </tr> 
+                                    <tr>
+                                        <th scope="row">  <?php echo $i;?></th>
+                            
+                                        <td>{{$daily_info->created_at}}</td>
+                                        <td>{{$daily_info->cash_in_amount}}</td>
+                                    </tr> 
 
 
-                                 <?php 
-                                        $j= $j+ $daily_info->cash_in_amount;
-                                        $i++;
-                                 
-                                 ?>
+                                    <?php 
+                                            $j= $j+ $daily_info->cash_in_amount;
+                                            $i++;
+                                    
+                                    ?>
                                 @endforeach()
+                                
+                         
+
+
                                 <tr>
-                                <td colspan="4"  > </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"  > Total </td>
-                                    <td> <?php echo $j; ?>.00 BDT</td>
+                                    <td colspan="2"  > Total </td>
+                                    <td> <h2><?php echo $j; ?>.00 BDT</h2></td>
                                 </tr>
                              </tbody>                        
                           </table>
+
+
+
+         
+                          <!-- end  -->
                         </div>
 
                     </div>

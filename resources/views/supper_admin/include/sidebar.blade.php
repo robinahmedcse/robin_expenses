@@ -94,11 +94,14 @@
        
                         <li><a>Cash In Report <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{URL::to('/dashboard/report/cash/in/date/waise')}}" target="_blank">Date Waise</a>
+                            <li class="sub_menu">
+                              <a href="{{URL::to('/dashboard/report/cash/in/date/waise')}}" target="_blank">Date Waise</a>
                             </li>
-                            <li><a href="{{URL::to('/dashboard/report/cash/in/category/waise')}}" target="_blank">Category Waise</a>
+                            <li>
+                              <a href="{{URL::to('/dashboard/report/cash/in/category/waise')}}" target="_blank">Category Waise</a>
                             </li>
-                            <li><a href="{{URL::to('/dashboard/report/cash/in/loan/waise')}}" target="_blank">Loan Waise</a>
+                            <li>
+                              <!-- <a href="{{URL::to('/dashboard/report/cash/in/loan/waise')}}" target="_blank">Loan Waise</a> -->
                             </li>
                           </ul>
                         </li>
