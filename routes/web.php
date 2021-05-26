@@ -145,13 +145,27 @@ Route::post('/dashboard/report/cash/in/category/waise/search', 'supper_admin\rep
 
 
 
-
-//  ---------
-// Route::get('/dashboard/report/cash/in/loan/waise', 'supper_admin\report\cashInReportController@loan_wise_cash_in_report_form');
-// Route::post('/dashboard/report/cash/in/loan/waise/search', 'supper_admin\report\cashInReportController@loan_wise_cash_in_report_search');
-
 // -------------------------------------End  Cash In Report----------------------------------------------
  
+
+
+
+
+// -------------------------------------expense Report----------------------------------------------
+
+Route::get('/dashboard/report/expense/date/waise', 'supper_admin\report\expenseReportController@expense_report_form_date_wise');
+Route::post('/dashboard/report/expense/date/waise/search', 'supper_admin\report\expenseReportController@expense_report_search');
+
+
+Route::get('/dashboard/report/expense/category/waise', 'supper_admin\report\expenseReportController@expense_report_form_category_date_wise');
+Route::post('/dashboard/report/expense/category/date/waise/search', 'supper_admin\report\expenseReportController@Category_wise_report_search_with_date');
+Route::post('dashboard/report/expense/category/waise/search', 'supper_admin\report\expenseReportController@category_wise_report_search_without_date');
+
+
+
+
+
+
 
 
 Route::get('/logout', 'dashboardController@adminLogOut');
